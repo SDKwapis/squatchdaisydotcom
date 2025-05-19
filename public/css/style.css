@@ -1,0 +1,75 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background: #111;
+    color: #eee;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background: #333;
+    padding: 1em;
+  }
+  
+  main {
+    padding: 2em;
+  }
+  
+  #comic-viewer img {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  }
+  
+  #controls {
+    margin-top: 1em;
+  }
+  
+  button {
+    padding: 0.5em 1em;
+    font-size: 1em;
+    margin: 0 1em;
+  }
+
+  .blog-post {
+    border-bottom: 1px solid #444;
+    padding: 1em 0;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .blog-date {
+    font-size: 0.9em;
+    color: #aaa;
+  }
+
+  nav {
+    background-color: #222;
+    padding: 1em 0;
+    margin-bottom: 2em;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  
+  .nav-links li a:hover {
+    text-decoration: underline;
+    color: #00ff88;
+  }
+  
+  
