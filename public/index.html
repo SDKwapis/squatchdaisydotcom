@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Squatch Daisy</title>
     <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -23,14 +24,31 @@
 
     <main>
         <div id="comic-viewer">
-            <img id="comic-image" src="" alt="Comic Page" />
+          <img id="comic-image" src="" alt="Comic Page" />
         </div>
         <div id="controls">
-            <button id="prev-btn">Prev</button>
-            <span id="page-number"></span>
-            <button id="next-btn">Next</button>
+          <button id="first-btn">⏮ First</button>
+          <button id="prev-btn">⬅ Prev</button>
+          <span id="page-number"></span>
+          <button id="next-btn">Next ➡</button>
+          <button id="last-btn">⏭ Last</button>
         </div>
-    </main>
+      </main>
+      <footer>
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img src="images/squatch-logo.png" alt="Squatch Daisy Logo" />
+          </div>
+          <div class="footer-links">
+            <p>&copy; 2025 Squatch Daisy. All rights reserved.</p>
+            <p>
+              <a href="https://instagram.com/yourhandle" target="_blank">Instagram</a> |
+              <a href="https://twitter.com/yourhandle" target="_blank">Twitter, or X, or whatever...</a>
+            </p>
+          </div>
+        </div>
+      </footer>
+      
     <script src="js/comicData.js"></script>
     <script src="js/main.js"></script>
 </body>

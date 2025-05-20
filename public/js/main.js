@@ -4,6 +4,8 @@ const imageElement = document.getElementById("comic-image");
 const pageNumberText = document.getElementById("page-number");
 const prevButton = document.getElementById("prev-btn");
 const nextButton = document.getElementById("next-btn");
+const firstButton = document.getElementById("first-btn");
+const lastButton = document.getElementById("last-btn");
 
 function renderPage() {
   const page = sampleComic.pages[currentPage];
@@ -25,6 +27,15 @@ nextButton.addEventListener("click", () => {
     currentPage++;
     renderPage();
   }
+});
+firstButton.addEventListener("click", () => {
+  currentPage = 0;
+  renderPage();
+});
+
+lastButton.addEventListener("click", () => {
+  currentPage = sampleComic.pages.length - 1;
+  renderPage();
 });
 
 renderPage(); // Load first page
