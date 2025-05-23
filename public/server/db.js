@@ -1,4 +1,9 @@
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./squatchdaisy.db');
+const { Sequelize } = require('sequelize');
 
-module.exports = db;
+const sequelize = new Sequelize('squatchdaisy_db', 'your_pg_username', 'your_pg_password', {
+  host: 'localhost',
+  dialect: 'postgres',
+});
+
+module.exports = sequelize;
+

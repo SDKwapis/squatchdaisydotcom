@@ -1,15 +1,16 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
+const sequelize = require('./models/index');
 const blogRoutes = require('./routes/blogRoutes');
 const comicRoutes = require('./routes/comicRoutes');
 
+const app = express();
 app.use(cors());
 app.use(express.json());
+
 app.use('/api/blogs', blogRoutes);
 app.use('/api/comics', comicRoutes);
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+sequelize.sync().then(() => {
+  app.listen(3000, () => console.log('Server running at http://localhost:3000'));
 });

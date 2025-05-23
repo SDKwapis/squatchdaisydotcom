@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS blog_posts (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  title TEXT,
-  date TEXT,
-  content TEXT
-);
