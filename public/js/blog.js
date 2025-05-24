@@ -12,26 +12,25 @@ document.addEventListener("DOMContentLoaded", () => {
       // Newest first
       posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-
       posts.forEach(post => {
-        const card = document.createElement("div");
-        card.className = "col-12";
+        const article = document.createElement("article");
+        article.className = "blog-post";
 
-        card.innerHTML = `
-          <div class="card bg-dark text-light shadow border-light">
-            <div class="card-body">
-              <h3 class="card-title">${post.title}</h3>
-              <h6 class="card-subtitle mb-2 text-muted">${new Date(post.date).toLocaleDateString()}</h6>
-              <p class="card-text">${post.content}</p>
-            </div>
+        article.innerHTML = `
+          <div class="blog-meta">
+            <span class="blog-stamp">FIELD REPORT</span>
+            <span class="blog-date">🕰️ ${new Date(post.date).toLocaleDateString()}</span>
           </div>
+          <h2 class="blog-title">${post.title}</h2>
+          <p class="blog-body">${post.content}</p>
         `;
 
-        blogList.appendChild(card);
+        blogList.appendChild(article);
       });
     })
     .catch(err => {
       console.error("Error loading blog posts:", err);
     });
 });
+
 

@@ -382,4 +382,28 @@ body.crt .blog-body {
   background: transparent;
 }
 
+.blog-post {
+  position: relative;
+  overflow: visible; /* ✅ allow the stamp to render outside bounds */
+}
+
+.blog-post::after {
+  content: "TOP SECRET";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-20deg);
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgba(156, 156, 156, 0);
+  pointer-events: none;
+  transition: all 0.4s ease;
+  font-family: 'Courier New', Courier, monospace;
+
+  white-space: nowrap; /* ✅ prevent wrapping */
+}
+
+.blog-post:hover::after {
+  color: rgba(200, 200, 200, 0.3);
+}
 
