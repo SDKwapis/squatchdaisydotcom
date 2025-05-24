@@ -190,3 +190,33 @@ body.dark img {
 .admin-link:hover {
   text-decoration: underline;
 }
+
+.secret-flicker {
+  color: #ffcc00;
+  font-size: 1.2rem;
+  animation: flicker 1.5s infinite alternate;
+  opacity: 0.5;
+  cursor: default;
+  user-select: none;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.2; }
+  10% { opacity: 0.6; }
+  20% { opacity: 0.1; }
+  30% { opacity: 0.7; }
+  40% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+  60% { opacity: 0.2; }
+  70% { opacity: 1; }
+  80% { opacity: 0.4; }
+  90% { opacity: 0.9; }
+  100% { opacity: 0.5; }
+}
+
+.flash-secret {
+  color: red !important;
+  animation: none !important;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out;
+}

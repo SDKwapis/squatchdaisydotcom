@@ -10,7 +10,6 @@ const lastButton = document.getElementById("last-btn");
 const bookSelect = document.getElementById("bookSelect");
 const chapterSelect = document.getElementById("chapterSelect");
 
-
 async function fetchComicPages() {
   try {
     const res = await fetch("http://localhost:3000/api/comics");
@@ -24,13 +23,12 @@ async function fetchComicPages() {
       );
     });
 
-    buildBookChapterMenus(); // ✅ moved here after comicPages is populated
+    buildBookChapterMenus();
     renderPage();
   } catch (error) {
     console.error("Failed to load comics:", error);
   }
 }
-
 
 function renderPage() {
   if (!comicPages.length) {
@@ -48,7 +46,6 @@ function renderPage() {
   firstButton.disabled = currentPage === 0;
   lastButton.disabled = currentPage === comicPages.length - 1;
 
-  // Preload next and previous images
   preloadImage(comicPages[currentPage + 1]);
   preloadImage(comicPages[currentPage - 1]);
 }
@@ -59,7 +56,6 @@ function preloadImage(page) {
     img.src = page.imageUrl;
   }
 }
-
 
 prevButton.addEventListener("click", () => {
   if (currentPage > 0) currentPage--;
@@ -83,9 +79,8 @@ lastButton.addEventListener("click", () => {
 
 function buildBookChapterMenus() {
   const books = [...new Set(comicPages.map(p => p.book))].sort((a, b) => a - b);
-
-  bookSelect.innerHTML = `<option value="">Select Book</option>`;
-  chapterSelect.innerHTML = `<option value="">Select Chapter</option>`;
+  bookSelect.innerHTML = `<option value="">Select File Drawer</option>`;
+  chapterSelect.innerHTML = `<option value="">Select Case File</option>`;
 
   books.forEach(book => {
     const opt = document.createElement("option");
@@ -141,8 +136,47 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+// 🧠 Konami Code + secret poem password feature
+const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+let keysPressed = [];
 
-// Start it off
+const poem = atob("U29mdCB0ZW5kcmlscyBodW0gaW4gc2lsZW50IGR1c2sKVGhyb3VnaCBlbWVyYWxkIHZlaWwsIGEgd2hpc3BlciBsaW5nZXJzCklud292ZW4gcGV0YWxzIGNsaW5nIGxpa2UgbWVtb3JpZXMKQ3Jlc2NlbmRvcyByaXNlIGluIGxhdHRpY2UgZ3JlZW4KCktlZXBzYWtlcyBvZiB3b29kbGFuZOKAmXMgaGlkZGVuIHNvbmcKUmVzb25hbmNlIGRyaXBzIGZyb20gdGhvcm5sZXNzIGJvd3MKQmVuZWF0aCBtb3NzeSBib3VnaCwgYSBjb3ZlcnQgcHVsc2UKVW5zZWVuIGhhbmRzIHBsdWNrIGEgY3J5c3RhbCBzdHJpbmcKClNoYWRvd3MgYnJlYXRoZSBpbiBtZWxvZGljIGhhemUKSGVyZSB0aGUgZGFuY2VycyB3ZWFyIG5vIG1hc2sKSW4gc29waG9tb3JlIHNhZ2EsIHR3byBraW4gc2xpcCBzdGVhbHRoeQpCYXJyZWwtZmlyZSByb2NrZXRzIGNhcnZlIHNlY3JldCB2YXVsdHMKClBvbnl0YWlsIHN3aXJscyB0aHJvdWdoIGNyZWVwaW5nIHZpbmVzClNpbHZlciB0b2tlbnMgZ2xpbnQgaW4gZHVza3kgbm9va3MKTmlnaHRmYWxsIG9yY2hlc3RyYXRlcyB0aGUgaHVzaApZb3UgZm9sbG93IHRoZSBzZWNyZXQgb3ZlcnR1cmUK");
+
+document.addEventListener("keydown", (e) => {
+  keysPressed.push(e.keyCode);
+  if (keysPressed.length > konamiCode.length) keysPressed.shift();
+
+  if (JSON.stringify(keysPressed) === JSON.stringify(konamiCode)) {
+    const flicker = document.querySelector('.secret-flicker');
+    const triggerPrompt = () => {
+      const answer = prompt(poem + "\n\nEnter the password to proceed:");
+      if (answer && answer.trim() === "Stickerbush Symphony") {
+        window.open("secret.html", "_blank");
+      } else {
+        alert("🕸️ The forest remains silent.");
+      }
+    };
+
+    if (flicker) {
+      flicker.classList.add('flash-secret');
+      setTimeout(() => {
+        flicker.classList.remove('flash-secret');
+        triggerPrompt();
+      }, 600);
+    } else {
+      triggerPrompt();
+    }
+  }
+});
+
+// 👣 Console hint (only runs once per session)
+if (!sessionStorage.getItem("squatch_console_hint_shown")) {
+  console.log("%c👣 You found a footprint...", "color: #ffcc00; font-size: 16px; font-weight: bold;");
+  console.log("%c01101011 01101111 01101110 01100001 01101101 01101001 00100000 01100011 01101111 01100100 01100101", "color: #00ffcc; font-family: monospace;");
+  sessionStorage.setItem("squatch_console_hint_shown", "true");
+}
+
+// Start loading content
 fetchComicPages();
-buildBookChapterMenus();
+
 
