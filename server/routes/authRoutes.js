@@ -3,6 +3,20 @@ const router = express.Router();
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const SECRET = 'your_super_secret_key';
+const path = require('path');
+
+function authMiddleware(req, res, next) {
+  const token = req.cookies.token;
+  if (!token) return res.redirect('/login.html');
+
+  try {
+    const decoded = jwt.verify(token, SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.redirect('/login.html');
+  }
+}
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;

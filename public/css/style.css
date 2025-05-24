@@ -182,3 +182,11 @@ body.dark img {
 .nav-links a {
   color: inherit;
 }
+
+.admin-link {
+  font-weight: bold;
+  color: #ffcc00;
+}
+.admin-link:hover {
+  text-decoration: underline;
+}
