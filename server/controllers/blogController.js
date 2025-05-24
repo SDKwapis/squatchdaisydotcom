@@ -1,7 +1,7 @@
 const Blog = require('../models/Blog');
 
 exports.getAll = async (req, res) => {
-  const posts = await Blog.findAll({ order: [['date', 'DESC']] });
+  const posts = await Blog.findAll({ order: [['createdAt', 'DESC']] });
   res.json(posts);
 };
 
@@ -11,6 +11,11 @@ exports.create = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const result = await Blog.destroy({ where: { id: req.params.id } });
-  res.json({ deleted: result });
+  try {
+    const deleted = await Blog.destroy({ where: { id: req.params.id } });
+    res.json({ deleted });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
+

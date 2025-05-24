@@ -1,57 +1,37 @@
-const blogContainer = document.getElementById("blog-posts");
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("http://localhost:3000/api/blogs")
+    .then(res => res.json())
+    .then(posts => {
+      const blogList = document.getElementById("blog-list");
 
-function renderBlogList() {
-  blogPosts.forEach(post => {
-    const wrapper = document.createElement("div");
-    wrapper.classList.add("blog-post");
+      if (!posts.length) {
+        blogList.innerHTML = `<p class="text-center text-muted">No blog posts yet.</p>`;
+        return;
+      }
 
-    const title = document.createElement("h2");
-    title.textContent = post.title;
+      // Newest first
+      posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    const date = document.createElement("p");
-    date.classList.add("blog-date");
-    date.textContent = post.date;
 
-    const preview = document.createElement("p");
-    preview.textContent = post.content.slice(0, 100) + "...";
+      posts.forEach(post => {
+        const card = document.createElement("div");
+        card.className = "col-12";
 
-    const readMore = document.createElement("button");
-    readMore.textContent = "Read More";
-    readMore.onclick = () => showFullPost(post);
+        card.innerHTML = `
+          <div class="card bg-dark text-light shadow border-light">
+            <div class="card-body">
+              <h3 class="card-title">${post.title}</h3>
+              <h6 class="card-subtitle mb-2 text-muted">${new Date(post.date).toLocaleDateString()}</h6>
+              <p class="card-text">${post.content}</p>
+            </div>
+          </div>
+        `;
 
-    wrapper.appendChild(title);
-    wrapper.appendChild(date);
-    wrapper.appendChild(preview);
-    wrapper.appendChild(readMore);
+        blogList.appendChild(card);
+      });
+    })
+    .catch(err => {
+      console.error("Error loading blog posts:", err);
+    });
+});
 
-    blogContainer.appendChild(wrapper);
-  });
-}
-
-function showFullPost(post) {
-  blogContainer.innerHTML = "";
-
-  const title = document.createElement("h2");
-  title.textContent = post.title;
-
-  const date = document.createElement("p");
-  date.classList.add("blog-date");
-  date.textContent = post.date;
-
-  const content = document.createElement("p");
-  content.textContent = post.content;
-
-  const backBtn = document.createElement("button");
-  backBtn.textContent = "⬅ Back to Posts";
-  backBtn.onclick = () => {
-    blogContainer.innerHTML = "";
-    renderBlogList();
-  };
-
-  blogContainer.appendChild(title);
-  blogContainer.appendChild(date);
-  blogContainer.appendChild(content);
-  blogContainer.appendChild(backBtn);
-}
-
-renderBlogList();

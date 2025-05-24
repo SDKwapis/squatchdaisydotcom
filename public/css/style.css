@@ -161,3 +161,24 @@ footer {
     }
   }
   
+  body.light {
+  background-color: #f4f4f4;
+  color: #111;
+}
+
+body.dark {
+  background-color: #121212;
+  color: #eee;
+}
+
+body.light img,
+body.dark img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.nav-links a {
+  color: inherit;
+}

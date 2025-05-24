@@ -1,0 +1,22 @@
+{
+  "name": "squatchdaisydotcom",
+  "version": "1.0.0",
+  "description": "Webcomic site with full stack admin and auth",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.11.3",
+    "sequelize": "^6.37.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.1.0"
+  }
+}
