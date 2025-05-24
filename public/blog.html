@@ -3,38 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Squatch Daisy Blog</title>
+  <title>Squatch Daisy – Field Notes</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">📖 Comic</a></li>
-          <li><a href="blog.html">📝 Blog</a></li>
-        </ul>
-      </nav>
-      
+  <nav>
+    <ul class="nav-links">
+      <li><a href="index.html">📖 Comic</a></li>
+      <li><a href="blog.html">📝 Field Notes</a></li>
+    </ul>
+  </nav>
+
   <header>
-    <h1>Squatch Daisy Blog</h1>
+    <h1>Squatch Daisy Field Notes</h1>
     <a href="index.html">⬅ Back to Comic</a>
   </header>
 
-  <main id="blog-posts">
-    <main class="container py-4">
-  <h1 class="text-center mb-4">📝 Blog Posts</h1>
-  <div id="blog-list" class="row gy-4"></div>
-</main>
-
-
-
+  <main class="container py-4">
+    <h1 class="text-center mb-4">📝 Field Reports</h1>
+    <div id="blog-list">
+      <!-- Blog posts will be injected here by blog.js -->
+    </div>
   </main>
+
   <footer>
     <div class="footer-content">
       <div class="footer-logo">
         <img src="images/squatch-logo.png" alt="Squatch Daisy Logo" />
       </div>
       <div class="footer-links">
+        
         <p>&copy; 2025 Squatch Daisy. All rights reserved.</p>
         <p>
           <a href="https://www.instagram.com/squatchdaisy/" target="_blank">Instagram</a> |
@@ -43,8 +41,9 @@
       </div>
     </div>
   </footer>
-  
+
   <script src="js/blogData.js"></script>
   <script src="js/blog.js"></script>
 </body>
 </html>
+

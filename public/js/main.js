@@ -39,6 +39,8 @@ function renderPage() {
 
   const page = comicPages[currentPage];
   imageElement.src = page.imageUrl;
+  document.getElementById("bookNum").textContent = page.book;
+
   pageNumberText.textContent = `Page ${currentPage + 1} of ${comicPages.length}`;
 
   prevButton.disabled = currentPage === 0;
@@ -79,8 +81,8 @@ lastButton.addEventListener("click", () => {
 
 function buildBookChapterMenus() {
   const books = [...new Set(comicPages.map(p => p.book))].sort((a, b) => a - b);
-  bookSelect.innerHTML = `<option value="">Select File Drawer</option>`;
-  chapterSelect.innerHTML = `<option value="">Select Case File</option>`;
+  bookSelect.innerHTML = `<option value="">📁 Open Drawer</option>`;
+  chapterSelect.innerHTML = `<option value="">📄 Pull Case File</option>`;
 
   books.forEach(book => {
     const opt = document.createElement("option");
@@ -175,6 +177,11 @@ if (!sessionStorage.getItem("squatch_console_hint_shown")) {
   console.log("%c01101011 01101111 01101110 01100001 01101101 01101001 00100000 01100011 01101111 01100100 01100101", "color: #00ffcc; font-family: monospace;");
   sessionStorage.setItem("squatch_console_hint_shown", "true");
 }
+
+document.getElementById("toggleDark").addEventListener("click", () => {
+  document.body.classList.toggle("crt");
+});
+
 
 // Start loading content
 fetchComicPages();
