@@ -23,6 +23,30 @@
     </pre>
 
     <p>Proceed with caution. This path was not meant for all.</p>
+    <div class="terminal-output">
+  <pre>
+>> ACCESSING NODE: /manifest/cache.html
+>> DECODING PAYLOAD...
+>> AUTHORIZATION: LEVEL 2 CLEARANCE
+>> TOKEN STRING DUMP BEGIN:
+
+  002001 765tr-H78ca--0A3
+  1a3C4-eaCh-3cHo--035
+  b3ffE-bRuSH--9xa2
+  11000011001101100011
+
+>> TOKEN STRING DUMP END
+
+>> ALERT: Hidden key embedded. Only the right passphrase unlocks the vault.
+  </pre>
+</div>
+<div class="password-gate">
+  <label for="secretPass">Enter passphrase to decrypt vault:</label>
+  <input type="text" id="secretPass" placeholder="Enter passphrase" />
+  <button onclick="checkPass()">Submit</button>
+  <p id="feedback" class="hint-text"></p>
+</div>
+<!-- Vault hint: The relic speaks in riddles. Cipher it well. -->
   </main>
 
   <footer>
@@ -39,5 +63,6 @@
       </div>
     </div>
   </footer>
+  <script src="js/main.js"></script>
 </body>
 </html>

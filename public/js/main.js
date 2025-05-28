@@ -181,7 +181,16 @@ if (!sessionStorage.getItem("squatch_console_hint_shown")) {
 document.getElementById("toggleDark").addEventListener("click", () => {
   document.body.classList.toggle("crt");
 });
-
+  function checkPass() {
+    const pass = document.getElementById("secretPass").value.trim();
+    const feedback = document.getElementById("feedback");
+    if (pass === "CipherRelic") {
+      window.location.href = "/manifest/cipher.html"; // change this to your next secret file
+    } else {
+      feedback.textContent = "Access denied. That’s not the key.";
+      feedback.style.color = "#f00";
+    }
+  }
 
 // Start loading content
 fetchComicPages();
