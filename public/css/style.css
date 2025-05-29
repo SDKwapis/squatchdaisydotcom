@@ -20,6 +20,21 @@ header h1 {
   color: #222;
 }
 
+.banner-header {
+  background: #ccc;
+  padding: 0;
+  text-align: center;
+  border-bottom: 3px solid #888;
+}
+
+.banner-img {
+  width: 100%;
+  max-width: 1500px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 nav {
   background-color: #bbb;
   padding: 1em 0;
