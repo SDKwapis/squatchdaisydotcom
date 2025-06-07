@@ -1,25 +1,19 @@
-require('dotenv').config();  // load .env in local/dev
-
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
 let sequelize;
 
 if (process.env.DATABASE_URL) {
-  // On Render (you’ve set DATABASE_URL in Env vars)
+  // PRODUCTION: use the URL injected by Render
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     protocol: 'postgres',
-    // Internal Render DB doesn’t need SSL, 
-    // but if you ever switch to External URL you can enable it:
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
+    dialectOptions: { 
+      ssl: { require: true, rejectUnauthorized: false } 
     }
   });
 } else {
-  // Local development
+  // LOCAL: fallback to .env DB_* settings
   sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
@@ -27,12 +21,13 @@ if (process.env.DATABASE_URL) {
     {
       host: process.env.DB_HOST || 'localhost',
       port: process.env.DB_PORT || 5432,
-      dialect: 'postgres'
+      dialect: 'postgres',
     }
   );
 }
 
 module.exports = sequelize;
+
 
 
 
