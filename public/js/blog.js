@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost:3000/api/blogs")
+  fetch("/api/blogs")
     .then(res => res.json())
     .then(posts => {
       const blogList = document.getElementById("blog-list");
@@ -32,5 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error loading blog posts:", err);
     });
 });
+
 
 
