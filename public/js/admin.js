@@ -44,20 +44,89 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Load and render all comic pages
   async function loadComicList() {
     const res = await fetch("/api/comics", {
       credentials: "include"
     });
     const comics = await res.json();
-    // …rest unchanged…
+
+    const list = document.getElementById("comicList");
+    list.innerHTML = "";
+
+    comics.forEach((comic) => {
+      const item = document.createElement("li");
+      item.className = "list-group-item d-flex justify-content-between align-items-center";
+
+      item.innerHTML = `
+        <div>
+          <strong>Book ${comic.book}, Chapter ${comic.chapter}, Page ${comic.pageNumber}</strong><br>
+          <img src="${comic.imageUrl}" alt="Comic" style="height: 60px; margin-top: 5px;">
+        </div>
+        <button class="btn btn-sm btn-danger" data-id="${comic.id}">Delete</button>
+      `;
+
+      // Delete handler
+      item.querySelector("button").addEventListener("click", async () => {
+        if (!confirm("Delete this comic page?")) return;
+        const del = await fetch(`/api/comics/${comic.id}`, {
+          method: "DELETE",
+          credentials: "include"
+        });
+        if (del.ok) {
+          alert("🗑️ Deleted!");
+          loadComicList();
+        } else {
+          alert("❌ Failed to delete.");
+        }
+      });
+
+      list.appendChild(item);
+    });
   }
 
+  // Load and render all blog posts
   async function loadBlogList() {
     const res = await fetch("/api/blogs", {
       credentials: "include"
     });
     const blogs = await res.json();
-    // …rest unchanged…
+
+    const blogList = document.getElementById("blogList");
+    blogList.innerHTML = "";
+
+    // Newest first
+    blogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    blogs.forEach((blog) => {
+      const item = document.createElement("li");
+      item.className = "list-group-item d-flex justify-content-between align-items-center";
+
+      item.innerHTML = `
+        <div>
+          <strong>${blog.title}</strong><br>
+          <small class="text-muted">${new Date(blog.date).toLocaleDateString()}</small>
+        </div>
+        <button class="btn btn-sm btn-danger" data-id="${blog.id}">Delete</button>
+      `;
+
+      // Delete handler
+      item.querySelector("button").addEventListener("click", async () => {
+        if (!confirm("Delete this blog post?")) return;
+        const del = await fetch(`/api/blogs/${blog.id}`, {
+          method: "DELETE",
+          credentials: "include"
+        });
+        if (del.ok) {
+          alert("🗑️ Blog post deleted!");
+          loadBlogList();
+        } else {
+          alert("❌ Failed to delete blog post.");
+        }
+      });
+
+      blogList.appendChild(item);
+    });
   }
 
   // Logout button
@@ -78,3 +147,4 @@ document.addEventListener("DOMContentLoaded", () => {
   loadComicList();
   loadBlogList();
 });
+
